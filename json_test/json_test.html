@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+	var obj1 = { user: "John", age:22, country:"United States"};
+	var obj2 = { user: "Andrew", age:23, country:"Hawaii"};
+	var obj3 = { user: "Albert", age:24, country:"Honolulu"};
+	var obj4 = {u1:obj1, u2:obj2, u3: obj3};
+	document.write("<h1> JSON Object Example </h1>");
+	document.write("<hr/>");
+	document.write(obj3.user + " is age: " + obj3.age + " and lives in " + obj3.country);
+	obj3.country = "italy";
+	document.write("<hr/>");
+	document.write(obj3.user + " is age: " + obj3.age + " and lives in " + obj3.country);
+	document.write("<hr/>");
+	document.write(obj4.u2.user + " is age: " + obj4.u2.age + " and lives in " + obj4.u2.country);	
+	document.write("<hr/>");	
+	
+	var meats = ["beef","lamb"];
+	var fruit = ["apple", "plumb","grape", "orange"];
+	var obj5 = {arr1:meats, arr2:fruit};
+	document.write("<h1> array object </h1/><hr/>");
+	document.write("meat is " + obj5.arr1[0] + " fruit is " + obj5.arr2[2] + " and " + obj5.arr2[3]);	
+	document.write("<hr/>");	
+	
+	</script>
+	
+</head>	
+<body>
+	
+	
+</body>	
+</html>
