@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+
+
+var field = '';
+var jsonData = new Array();
+
+jsonData[0] = {
+    "email_To": "begin.tttesting@gmail.com",
+    "email_CC": "platinum.ssstar@gmail.com",
+    "Subject": "This is a test",
+    "File_Attachment": "",
+    "header_Logo": "",
+    "mce_0": "<p><strong>Dear Valued Customer zzz,<\/strong><\/p>\r\n<p>As part of our ongoing support and value process, test  Micro has created the following quote for your upcoming Maintenance Renewals.<\/p>\r\n<p><strong>Quote for %account_name%: test 1234<\/strong><\/p>",
+    "mce_6": "<p>zzz This offer to sell the listed product(s) is subject to product availability and test  Micro&lsquo;s standard terms and conditions that are published on <a href=\"http:\/\/www.test micro.com\">www.test micro.com<\/a>. Prices are subject to change without notice in the event the products manufacturer\/publisher raises the price to test  Micro. Please contact the test  Micro Sales desk at 1.800.456.8000 if you have any additional questions.<br \/><br \/> <strong>Best Regards,<\/strong><br \/><br \/> <strong>Your test  Micro Services Team<\/strong><br \/><br \/><\/p>\r\n<hr \/>\r\n<p style=\"font-size: 11px; color: #333;\">Copyright &copy; %current_year% test  Micro<br \/> %unsublink%<\/p>"
+};
+
+jsonData[1] = {
+    "email_To": "begin.ttesting@gmail.com",
+    "email_CC": "platinum.sttar@gmail.com",
+    "Subject": "test CSR Alert",
+    "File_Attachment": "README.txt",
+    "header_Logo": "",
+    "mce_7": "<p><strong>Dear Valued Customer,<\/strong><\/p>\r\n<p> test CSR Alert<\/p>\r\n<p><strong>Quote for %account_name%:<\/strong><\/p>",
+    "mce_8": "<p> test CSR Alert<\/p>"
+};
+
+jsonData[2] = {
+    "email_To": "begin.ttesting@gmail.com",
+    "email_CC": "plattinum.star@gmail.com",
+    "Subject": "test CSR Alert",
+    "mce_7": " this is a test, this is only a test"
+};
+jsonData[3] = {
+    "email_To": "begiin.testing@gmail.com",
+    "email_CC": "platinum.star@gmaiil.com",
+    "Subject": "test CSR Alert",
+
+    "mce_7": " this is a test, this is only a test"
+};
+jsonData[4] = {
+    "email_To": "beginn.testing@gmail.com",
+    "email_CC": "platinnum.star@gmail.com",
+    "Subject": "test CSR Alert",
+    "File_Attachment": "README.txt",
+    "header_Logo": "",
+    "mce_9": "<p><strong>Dear Valued Customer,<\/strong><\/p>\r\n<p> test CSR Alert<\/p>\r\n<p><strong>Quote for %account_name%:<\/strong><\/p> <p>This offer to sell the listed product(s) is subject to product availability and test  Micros standard terms and conditions that are published on <a href=\"http:\/\/www.test micro.com\">www.test micro.com<\/a>. Prices are subject to change without notice in the event the products manufacturer\/publisher raises the price to test  Micro. Please contact the test  Micro Sales desk at 1.800.456.8000 x77657 or email us at <a href=\"mailto:ACD-IBMservices@test micro.com\">ACD-IBMservices@test micro.com<\/a> if you have any additional questions.<\/p>\r\n<p><strong>Best Regards,<\/strong><\/p>\r\n<p><strong>Your test  Micro Services Team<\/strong><\/p>\r\n<hr \/>\r\n<p style=\"font-size: 11px; color: #333;\">Copyright &copy; %current_year% test  Micro<br \/> %unsublink% test CSR Alert<\/p>"
+};
+
+var i;
+for (i = 0; i < 5; i++) {
+    var data = jsonData[i];
+    console.log("------------------ LOOP = " + i);
+    $.each(data, function(key, saved_value) {
+            console.log("KEY = " + key + " , VALUE= " + saved_value);
+            if ((key.substring(0, 4).toLowerCase() != "file") && (key.substring(0, 4).toLowerCase() != "head")) {
+                if (key.substring(0, 4) == "mce_") {
+                    //--- replace Tincy MCE contents in div
+                    console.log("finding key = " + key);
+                    $("#" + key + "").html(saved_value);
+                } else {
+                    console.log("first 4 chars are = " + key.substring(0, 4));
+                    elem = "[name='" + key + "']";
+                    field = $(elem);
+                    elemType = field[0].type.toLowerCase();
+                    console.log("-Element Type = " + elemType);
+                    switch (elemType) {
+                        case "input":
+                        case "select":
+                        case "textarea":
+                            $(field[0]).val(saved_value);
+                            break;
+                        default:
+                            $(field[0]).val(saved_value);
+                    }
+                }
+            
+        } else { //--- skipping if File atachment or head logo
+            console.log('skipping search');
+        }
+    }); //--- end loop through each key value
+}  //---- End for loop throught array
+});
+</script>
+</head>
+<body>
+     <table class="form_table">
+      <tr>
+        <td class="top"><label class="email_addresses_trigger"><a href="javascript:void(0);">To</a></label></td>
+        <td><textarea rows="2" cols="30" name="email_To"></textarea><br /><small>(separate multiple email addresses with a comma)</small></td>
+      </tr>
+      <tr>
+        <td class="top"><label class="email_addresses_trigger"><a href="javascript:void(0);">CC</a></label></td>
+        <td><textarea rows="2" cols="30" name="email_CC"></textarea><br /><small>(separate multiple email addresses with a comma)</small></td>
+      </tr>
+      <tr>
+        <td><label>Subject</label></td>
+        <td><input type="text" size="30" name="Subject"/></td>
+      </tr>
+      <tr>
+        <td><label>File Attachments</label></td>
+        <td><input type="file" name="File_Attachment"/></td>
+      </tr>
+    </table>
+    
+    <h4>Email Content: <br />
+      <small>You can edit the text and change the header image directly in the area below.</small></h4>
+    
+    <div style="background: #ddd; padding: 20px; border: 1px solid #999;">
+      <table class="content" align="center" border="0" cellpadding="0" cellspacing="0" style="border: 1px solid #666666; box-shadow: 0 1px 3px 0 rgba(0,0,0,0.4);" bgcolor="#ffffff">
+        <tr>
+          <td width="700" align="left" style="padding:10px; font-family: Arial; font-size: 14px; line-height: 1.5;">
+  
+            <div class="email_header" style="position: relative;">
+              <img src="" alt="test Logo" style="display:block;width:auto;height:auto;max-width:100%;" />
+
+              <div class="email_header_upload" style="display:none; position:absolute; top:0; left:0; right:0; padding: 2px; background: #fff;">
+                <small>Change header image/logo:</small>
+                <input type="file" name="header_Logo"/>
+              </div>
+            </div>
+  
+
+            <div class="email_content" id="mce_7" style="margin-bottom: 1em;">
+              <p><strong>Dear Valued Customer,</strong></p>
+  
+              <p>As part of our ongoing support and value process, test Micro has created the following quote for your upcoming Maintenance Renewals.</p>
+  
+              <p><strong>Quote for %account_name%:</strong></p>
+            </div>
+
+            <div style="width:auto;max-width:678px;width:678px;overflow:auto;">
+              <table id="datatable" style="background-color:#ffffff; border:1px solid #666666; border-collapse:collapse; box-shadow: 0 1px 3px 0 rgba(0,0,0,0.4);">
+                <tr>
+                  <td style="background-color:#eeeeee; color:#0099cc; font-size:12px; font-weight:bold; border:1px solid #999999; padding:5px; border-left:1px solid #666666;">Type</td>
+                  <td style="background-color:#eeeeee; color:#0099cc; font-size:12px; font-weight:bold; border:1px solid #999999; padding:5px;">Model</td>
+                  <td style="background-color:#eeeeee; color:#0099cc; font-size:12px; font-weight:bold; border:1px solid #999999; padding:5px;">Serial Number</td>
+                  <td style="background-color:#eeeeee; color:#0099cc; font-size:12px; font-weight:bold; border:1px solid #999999; padding:5px;">Existing ServicePac</td>
+                  <td style="background-color:#eeeeee; color:#0099cc; font-size:12px; font-weight:bold; border:1px solid #999999; padding:5px;">Ref PO #</td>
+                  <td style="background-color:#eeeeee; color:#0099cc; font-size:12px; font-weight:bold; border:1px solid #999999; padding:5px;">Install Date</td>
+                  <td style="background-color:#eeeeee; color:#0099cc; font-size:12px; font-weight:bold; border:1px solid #999999; padding:5px;">Warranty End Date</td>
+                  <td style="background-color:#eeeeee; color:#0099cc; font-size:12px; font-weight:bold; border:1px solid #999999; padding:5px;">Contract Number</td>
+                  <td style="background-color:#eeeeee; color:#0099cc; font-size:12px; font-weight:bold; border:1px solid #999999; padding:5px;">Existing ServicePac SLA</td>
+                  <td style="background-color:#eeeeee; color:#0099cc; font-size:12px; font-weight:bold; border:1px solid #999999; padding:5px;">Renewal Part Number</td>
+                  <td style="background-color:#eeeeee; color:#0099cc; font-size:12px; font-weight:bold; border:1px solid #999999; padding:5px;">Renewal Date</td>
+                  <td style="background-color:#eeeeee; color:#0099cc; font-size:12px; font-weight:bold; border:1px solid #999999; padding:5px;">Renewal Price</td>
+                  <td style="background-color:#eeeeee; color:#0099cc; font-size:12px; font-weight:bold; border:1px solid #999999; padding:5px; border-right:1px solid #666666;">Renewal Term/SLA</td>
+                </tr>
+                <tr>
+                  <td style="border:1px solid #999999; font-size:12px; padding:5px; border-bottom:1px solid #666666; border-left:1px solid #666666;">7038&nbsp; </td>
+                  <td style="border:1px solid #999999; font-size:12px; padding:5px; border-bottom:1px solid #666666;">6M2&nbsp; </td>
+                  <td style="border:1px solid #999999; font-size:12px; padding:5px; border-bottom:1px solid #666666;">0017F6A&nbsp; </td>
+                  <td style="border:1px solid #999999; font-size:12px; padding:5px; border-bottom:1px solid #666666;">&nbsp; </td>
+                  <td style="border:1px solid #999999; font-size:12px; padding:5px; border-bottom:1px solid #666666;">&nbsp; </td>
+                  <td style="border:1px solid #999999; font-size:12px; padding:5px; border-bottom:1px solid #666666; white-space: nowrap" nowrap="nowrap">08/01/2014&nbsp; </td>
+                  <td style="border:1px solid #999999; font-size:12px; padding:5px; border-bottom:1px solid #666666; white-space: nowrap" nowrap="nowrap">08/04/2014&nbsp; </td>
+                  <td style="border:1px solid #999999; font-size:12px; padding:5px; border-bottom:1px solid #666666; white-space: nowrap" nowrap="nowrap">&nbsp; </td>
+                  <td style="border:1px solid #999999; font-size:12px; padding:5px; border-bottom:1px solid #666666;">&nbsp; </td>
+                  <td style="border:1px solid #999999; font-size:12px; padding:5px; border-bottom:1px solid #666666;">44T6090&nbsp; </td>
+                  <td style="border:1px solid #999999; font-size:12px; padding:5px; border-bottom:1px solid #666666; white-space: nowrap" nowrap="nowrap">08/05/2014&nbsp; </td>
+                  <td style="border:1px solid #999999; font-size:12px; padding:5px; border-bottom:1px solid #666666;">$158.00&nbsp; </td>
+                  <td style="border:1px solid #999999; font-size:12px; padding:5px; border-bottom:1px solid #666666; border-right:1px solid #666666;">1 Year Onsite Repair 9x5 Next Business Day&nbsp; </td>
+                </tr>
+              </table>
+            </div>
+            
+            <div class="email_content">
+              This offer to sell the listed product(s) is subject to product availability and test Micro&lsquo;s standard terms and conditions that are published on <a href="http://www.testmicro.com">www.testmicro.com</a>. Prices are subject to change without notice in the event the products manufacturer/publisher raises the price to test Micro. Please contact the test Micro Sales desk at 1.800.456.8000 if you have any additional questions.<br><br>
+  
+              <strong>Best Regards,</strong><br><br>
+  
+              <strong>Your test Micro Services Team</strong><br><br>
+  
+              <hr />
+  
+              <p style="font-size: 11px; color: #333;">
+                Copyright &copy; %current_year% test Micro<br />
+                %unsublink%
+              </p>
+            </div>
+
+                        
+          </td>
+        </tr>
+      </table>
+
+ 
+</body>
